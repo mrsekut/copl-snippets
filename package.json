@@ -1,0 +1,16 @@
+{
+  "name": "copl-snippets",
+  "version": "0.0.1",
+  "publisher": "mrsekut",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YoshinoriN/vscode-current-file-path-extension"
+  },
+  "engines": {
+    "vscode": "^1.18.0"
+  },
+  "galleryBanner": {
+    "color": "#5c2d91",
+    "theme": "dark"
+  }
+}
