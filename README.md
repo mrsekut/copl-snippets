@@ -7,6 +7,11 @@
 1. make the file extension `.copl`
 2. Snippets are available by entering RuleName in lowercase letters
 
-## example
+### example
 
 ![](https://github.com/mrsekut/copl-snippets/blob/master/img/ex.gif)
+
+## Todos
+
+- [ ] icon
+- [ ] add snippets
