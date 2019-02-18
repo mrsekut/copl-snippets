@@ -4,7 +4,7 @@
   "publisher": "mrsekut",
   "repository": {
     "type": "git",
-    "url": "https://github.com/YoshinoriN/vscode-current-file-path-extension"
+    "url": "https://github.com/mrsekut/copl-snippets"
   },
   "engines": {
     "vscode": "^1.18.0"
