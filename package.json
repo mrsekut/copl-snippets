@@ -12,5 +12,22 @@
   "galleryBanner": {
     "color": "#5c2d91",
     "theme": "dark"
+  },
+  "contributes": {
+    "languages": [
+      {
+        "id": "copl",
+        "extensions": [
+          ".copl"
+        ]
+      }
+    ],
+    "grammars": [
+      {
+        "language": "copl",
+        "scopeName": "source.copl",
+        "path": "./syntaxes/copl.json."
+      }
+    ],
   }
 }

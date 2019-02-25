@@ -1,0 +1,272 @@
+{
+  // Nat
+  // =============================
+  "P-ZERO": {
+    "prefix": "pzero",
+    "body": ["Z plus $1 is $1 by P-Zero {};"],
+    "description": "P-Zero"
+  },
+  "P-SUCC": {
+    "prefix": "psucc",
+    "body": ["$1 plus $2 is $3 by P-Succ {$4};"],
+    "description": "P-Succ"
+  },
+  "T-ZERO": {
+    "prefix": "tzero",
+    "body": ["Z times $1 is Z by T-Zero {};"],
+    "description": "T-Zero"
+  },
+  "T-SUCC": {
+    "prefix": "tsucc",
+    "body": [
+      "$1 times $2 is $3 by T-Succ {",
+      "\t${4:times}",
+      "\t${5:plus}",
+      "};"
+    ],
+    "description": "t-succ"
+  },
+  // CompareNat1
+  // =============================
+  "L-SUCC": {
+    "prefix": "lsucc",
+    "body": ["$1 is less than S($1) by L-Succ {}"],
+    "description": "P-Zero"
+  },
+  "L-TRANS": {
+    "prefix": "ltrans",
+    "body": [
+      "$1 is less than $2 by L-Trans {",
+      "\t$1 is less than $3 by $4 {$5};",
+      "\t$3 is less than $2 by $6 {$7};",
+      "}"
+    ],
+    "description": "L-Trans"
+  },
+  // CompareNat2
+  // =============================
+  "L-ZERO": {
+    "prefix": "lzero",
+    "body": ["Z is less than S($1) by L-Zero {};"],
+    "description": "L-Zero"
+  },
+  "L-SUCCSUCC": {
+    "prefix": "lsuccsucc",
+    "body": ["$1 is less than $2 by L-SuccSucc {$3}"],
+    "description": "L-SuccSucc"
+  },
+  // CompareNat3
+  // =============================
+  "L-SUCCR": {
+    "prefix": "lsuccr",
+    "body": ["$1 is less than $2 by L-SuccR {$3}"],
+    "description": "P-SuccR"
+  },
+  // EvalNatExp
+  // =============================
+  "E-Const": {
+    "prefix": "econst",
+    "body": ["$1 evalto $1 by E-Const {};"],
+    "description": "E-Const"
+  },
+  "E-PLUS": {
+    "prefix": "eplus",
+    "body": [
+      "$1 + $2 evalto $3 by E-Plus {",
+      "\t${4:exp};",
+      "\t${5:exp2};",
+      "\t${6:exp3};",
+      "};"
+    ],
+    "description": "E-Plus"
+  },
+  // ReduceNatExp
+  // =============================
+  "R-PLUS": {
+    "prefix": "rplus",
+    "body": ["$1 + $2 ---> $3 by R-Plus {", "\t$4", "}"],
+    "description": "R-Plus"
+  },
+  "R-TIMES": {
+    "prefix": "rtimes",
+    "body": ["$1 * $2 ---> $3 by R-Times {$4};"],
+    "description": "R-Times"
+  },
+  "R-PLUSL": {
+    "prefix": "rplusl",
+    "body": ["$1 + $2 ---> $3 by R-PlusL {$4};"],
+    "description": "R-PlusL"
+  },
+  "R-PLUSR": {
+    "prefix": "rplusr",
+    "body": ["$1 + $2 ---> $3 by R-PlusR {$4}"],
+    "description": "R-PlusR"
+  },
+  // R-TimesL
+  // R-TimesR
+  // DR-Plus
+  "DR-TIMES": {
+    "prefix": "drtimes",
+    "body": ["$1 * $2 -d-> $3 by DR-Times {", "\t$4", "};"],
+    "description": "MR-Times"
+  },
+  "DR-PLUSL": {
+    "prefix": "drplusl",
+    "body": ["$1 + $2 -d-> $3 + $2 by DR-PlusL {", "\t$4", "};"],
+    "description": "DR-PlusL"
+  },
+  "DR-PLUSR": {
+    "prefix": "drplusr",
+    "body": ["$1 + $2 -d-> $1 + $3 by DR-PlusR {", "\t$4", "};"],
+    "description": "DR-PlusR"
+  },
+  "MR-MLUTI": {
+    "prefix": "mrmluti",
+    "body": [
+      "$1 -*-> $2 by MR-Multi {",
+      "\t$1 -*-> $3 by ${4:rule} {$5};",
+      "\t$3 -*-> $2 by ${6:rule} {$7};",
+      "};"
+    ],
+    "description": "MR-Mluti"
+  },
+  "MR-ONE": {
+    "prefix": "mrone",
+    "body": ["$1 + $2 -*-> $3 by MR-One {", "\t$4", "};"],
+    "description": "MR-One"
+  },
+  // EvalML 1
+  // =============================
+  "E-INT": {
+    "prefix": "eint",
+    "body": ["$1 evalto $1 by E-Int {};"],
+    "description": "E-Int"
+  },
+  "E-IFT": {
+    "prefix": "eift",
+    "body": [
+      "if $1 then $2 else $3 evalto $4 by E-IfT {",
+      "\t${5:exp};",
+      "\t${6:exp2};",
+      "};"
+    ],
+    "description": "E-Minus"
+  },
+  "E-IFF": {
+    "prefix": "eiff",
+    "body": [
+      "if $1 then $2 else $3 evalto $4 by E-IfF {",
+      "\t${5:exp};",
+      "\t${6:exp2};",
+      "};"
+    ],
+    "description": "E-Minus"
+  },
+  "E-MINUS": {
+    "prefix": "eminus",
+    "body": [
+      "$1 - $2 evalto $3 by E-Minus {",
+      "\t${4:exp};",
+      "\t${5:exp2};",
+      "\t${6:exp3};",
+      "};"
+    ],
+    "description": "E-Minus"
+  },
+  "E-TIMES": {
+    "prefix": "etimes",
+    "body": [
+      "$1 * $2 evalto $3 by E-Times {",
+      "\t${4:exp};",
+      "\t${5:exp2};",
+      "\t${6:exp3};",
+      "};"
+    ],
+    "description": "E-Times"
+  },
+  "E-LT": {
+    "prefix": "elt",
+    "body": [
+      "$1 < $2 evalto $3 by E-Lt {",
+      "\t${4:exp};",
+      "\t${5:exp2};",
+      "\t${6:exp3};",
+      "};"
+    ],
+    "description": "E-Times"
+  },
+  "B-PLUS": {
+    "prefix": "bplus",
+    "body": ["$1 plus $2 is $3 by B-Plus {};"],
+    "description": "E-Int"
+  },
+  "B-MINUS": {
+    "prefix": "bminus",
+    "body": ["$1 minus $2 is $3 by B-Minus {};"],
+    "description": "B-Minus"
+  },
+  "B-TIMES": {
+    "prefix": "btimes",
+    "body": ["$1 times $2 is $3 by B-Times {};"],
+    "description": "B-Times"
+  },
+  "B-LT": {
+    "prefix": "blt",
+    "body": ["$1 less than $2 is $3 by B-Lt {$4};"],
+    "description": "B-LT"
+  },
+  // EvalML 1 Err
+  // =============================
+  // EvalML 2
+  // =============================
+  // TODO: name
+  "EE-INT": {
+    "prefix": "eeint",
+    "body": ["$1 |- $2 evalto $3 by E-Int {};"],
+    "description": "E-Int"
+  },
+  // TODO: name
+  "EE-PLUS": {
+    "prefix": "eeplus",
+    "body": ["$1 |- $2 + $3 evalto $4 by E-Plus {$5};"],
+    "description": "E-Plus"
+  },
+  "E-VAR1": {
+    "prefix": "evar1",
+    "body": ["$1 |- x evalto $2 by E-Var1 {$3};"],
+    "description": "E-Var1"
+  },
+  "E-VAR2": {
+    "prefix": "evar2",
+    "body": ["${1:Env} |- x evalto $2 by E-Var2 {$3};"],
+    "description": "E-Var2"
+  },
+  // TODO: name
+  "EE-IFT": {
+    "prefix": "eeift",
+    "body": [
+      "${1:Env} |- if $2 then $3 else $4 evalto $5 by E-IfT {",
+      "\t$1 |- $2 evalto true by ${6:rule} {$7};",
+      "\t$1 |- $3 evalto $5 by ${8:rule} {$9};",
+      "};"
+    ],
+    "description": "E-IfT"
+  },
+  "E-LET": {
+    "prefix": "elet",
+    "body": ["$1 |- let $2 in $3 evalto $4 by E-Let {", "\t$5", "\t$6", "};"],
+    "description": "E-Let"
+  },
+  // EvalML 3
+  // =============================
+  "E-FUN": {
+    "prefix": "efun",
+    "body": ["$1 |- fun $2 evalto ($1)[fun $2] by E-Fun {};"],
+    "description": "E-Fun"
+  },
+  "E-APP": {
+    "prefix": "eapp",
+    "body": ["$1 |- $2 $3 evalto $4 by E-App {", "\t$5", "\t$6", "\t$7", "};"],
+    "description": "E-App"
+  }
+}
