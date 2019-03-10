@@ -142,6 +142,11 @@
     "body": ["$1 evalto $1 by E-Int {};"],
     "description": "E-Int"
   },
+  "E-BOOl": {
+    "prefix": "ebool",
+    "body": ["$1 evalto $1 by E-Bool {};"],
+    "description": "E-Bool"
+  },
   "E-IFT": {
     "prefix": "eift",
     "body": [
@@ -217,6 +222,88 @@
   },
   // EvalML 1 Err
   // =============================
+  "E-PLUSBOOLL": {
+    "prefix": "epbl",
+    "body": [
+      "$1 + $2 evalto error by E-PlusBoolL {",
+      "\t$1 evalto $1 by E-Bool {};",
+      "}"
+    ],
+    "description": "E-PlusBoolL"
+  },
+  "E-PLUSBOOLR": {
+    "prefix": "epbr",
+    "body": [
+      "$1 + $2 evalto error by E-PlusBoolR {",
+      "\t$2 evalto $2 by E-Bool {};",
+      "}"
+    ],
+    "description": "E-PlusBoolR"
+  },
+  "E-PLUSERRORL": {
+    "prefix": "epel",
+    "body": ["$1 + $2 evalto error by E-PlusErrorL {$3};"],
+    "description": "E-PlusErrorL"
+  },
+  "E-PLUSERRORR": {
+    "prefix": "epel",
+    "body": ["$1 + $2 evalto error by E-PlusErrorR {$3};"],
+    "description": "E-PlusErrorR"
+  },
+  "E-LTBOOLL": {
+    "prefix": "elbl",
+    "body": ["$1 < $2 evalto error by E-LtBoolL {$3};"],
+    "description": "E-LtBoolL"
+  },
+  "E-LTBOOLR": {
+    "prefix": "elbr",
+    "body": ["$1 < $2 evalto error by E-LtBoolR {$3};"],
+    "description": "E-LtBoolR"
+  },
+  "E-LTERRORL": {
+    "prefix": "elel",
+    "body": ["$1 < $2 evalto error by E-LtErrorR {$3};"],
+    "description": "E-LtErrorR"
+  },
+  "E-LTERRORR": {
+    "prefix": "eler",
+    "body": ["$1 < $2 evalto error by E-LtErrorL {$3};"],
+    "description": "E-LtErrorL"
+  },
+  "E-IFINT": {
+    "prefix": "eifi",
+    "body": ["if $1 then $2 else $3 evalto error by E-IfInt {$4};"],
+    "description": "E-IfInt"
+  },
+  "E-IFERROR": {
+    "prefix": "eife",
+    "body": [
+      "if $1 then $2 else $3 evalto error by E-IfError {",
+      // "\t$1 evalto error",
+      "};"
+    ],
+    "description": "E-IfError"
+  },
+  "E-IFTERROR": {
+    "prefix": "eifte",
+    "body": [
+      "if $1 then $2 else $3 evalto error by E-IfError {",
+      "\t$1 evalto true by $4 {$5};",
+      "\t$2 evalto error by $6 {$7};",
+      "};"
+    ],
+    "description": "E-IfTError"
+  },
+  "E-IFFERROR": {
+    "prefix": "eiffe",
+    "body": [
+      "if $1 then $2 else $3 evalto error by E-IfError {",
+      "\t$1 evalto false by $4 {$5};",
+      "\t$2 evalto error by $6 {$7};",
+      "};"
+    ],
+    "description": "E-IfFError"
+  },
   // EvalML 2
   // =============================
   // TODO: name
@@ -245,7 +332,7 @@
   "EE-IFT": {
     "prefix": "eeift",
     "body": [
-      "${1:Env} |- if $2 then $3 else $4 evalto $5 by E-IfT {",
+      "$1 |- if $2 then $3 else $4 evalto $5 by E-IfT {",
       "\t$1 |- $2 evalto true by ${6:rule} {$7};",
       "\t$1 |- $3 evalto $5 by ${8:rule} {$9};",
       "};"
@@ -268,5 +355,142 @@
     "prefix": "eapp",
     "body": ["$1 |- $2 $3 evalto $4 by E-App {", "\t$5", "\t$6", "\t$7", "};"],
     "description": "E-App"
+  },
+  // EvalML 4
+  // =============================
+  "E-VAR": {
+    "prefix": "evar",
+    "body": ["$1 |- $2 evalto $3 by E-Var {};"],
+    // "body": ["$1 |- $2 evalto $3 by E-Var {", "\t$1($2) = $3", "};"],
+    "description": "E-Nil"
+  },
+  "E-NIL": {
+    "prefix": "enil",
+    "body": ["$1 |- [] evalto [] by E-Nil {$2};"],
+    "description": "E-Nil"
+  },
+  "E-CONST": {
+    "prefix": "econs",
+    "body": [
+      "$1 |- $2 :: $3 evalto $4 :: $5 by E-Cons {",
+      "\t$6",
+      "\t$7",
+      "};"
+    ],
+    "description": "E-Cons"
+  },
+  "E-MATCHCONS": {
+    "prefix": "ematchcons",
+    "body": [
+      "$1 |- match $2 with [] -> $3 | $4 evalto $5 by E-MatchCons {",
+      "\t$6",
+      "\t$7",
+      "};"
+    ],
+    "description": "E-MatchCons"
+  },
+  "E-MATCHNIL": {
+    "prefix": "ematchnil",
+    "body": [
+      "$1 |- match $2 with [] -> $3 | $4 evalto $5 by E-MatchNil {",
+      "\t$1 |- $2 evalto [] by ${6:rule} {$7};",
+      "\t$1 |- $3 evalto $5 by ${8:rule} {$9};",
+      "};"
+    ],
+    "description": "E-MatchCons"
+  },
+  // TypingML 4
+  // =============================
+  "T-Int": {
+    "prefix": "tint",
+    "body": ["$1 |- $2: int by T-Int {$3};"],
+    "description": "T-Int"
+  },
+  "T-Bool": {
+    "prefix": "tbool",
+    "body": ["$1 |- $2: bool by T-Bool {$3};"],
+    "description": "T-Bool"
+  },
+  "T-IF": {
+    "prefix": "tif",
+    "body": [
+      "$1 |- if $2 then $3 else $4: $5 by T-If {",
+      "\t$6",
+      "\t$7",
+      "\t$8",
+      "};"
+    ],
+    "description": "T-If"
+  },
+  "T-Plus": {
+    "prefix": "tplus",
+    "body": ["$1 |- $2 + $3: int by T-Plus {$4};"],
+    "description": "T-Plus"
+  },
+  "T-Minus": {
+    "prefix": "tminus",
+    "body": ["$1 |- $2 - $3: int by T-Minus {$4};"],
+    "description": "T-Minus"
+  },
+  "T-Times": {
+    "prefix": "ttimes",
+    "body": ["$1 |- $2 * $3: int by T-Times {$4};"],
+    "description": "T-Times"
+  },
+  "T-LT": {
+    "prefix": "tlt",
+    "body": ["$1 |- $2 < $3: bool by T-Lt {", "\t$4", "\t$5", "};"],
+    "description": "T-Lt"
+  },
+  "T-Var": {
+    "prefix": "tvar",
+    "body": ["$1 |- $2: $3 by T-Var {};"],
+    "description": "T-Var"
+  },
+  "T-LET": {
+    "prefix": "tlet",
+    "body": ["$1 |- let $2 = $3 in $4: $5 by T-Let {", "\t$6", "\t$7", "};"],
+    "description": "T-Let"
+  },
+  "T-FUN": {
+    "prefix": "tfun",
+    "body": [
+      "$1 |-fun $2 -> $3: $4 -> $5 by T-Fun {",
+      "\t$2: $4 |- $3: $5 by $6 {$7}",
+      "};"
+    ],
+    "description": "T-Fun"
+  },
+  "T-APP": {
+    "prefix": "tapp",
+    "body": [
+      "$1 |-$2 $3: $4 by T-App {",
+      "\t$1 |- $2: $5 -> $4 by $6 {$7};",
+      "\t$1 |- $3: $5 by $8 {$9};",
+      "};"
+    ],
+    "description": "T-App"
+  },
+  "T-NIL": {
+    "prefix": "tnil",
+    "body": ["$1 |- []: $2 list by T-Nil {};"],
+    "description": "T-Nil"
+  },
+  "T-CONS": {
+    "prefix": "tcons",
+    "body": [
+      "$1 |- $2 :: $3: $4 list by T-Cons {",
+      "\t$1 |- $2: $4 by $5 {$6};",
+      "\t$1 |- $3: $4 by $7 {$8};",
+      "};"
+    ],
+    "description": "T-Cons"
+  },
+  // PolyTypingML 4
+  // =============================
+  "T-ABS": {
+    "prefix": "tabs",
+    "body": ["$1 |- fun $2 -> $3: $4 -> $5 by T-Abs {$6};"],
+    "description": "T-Abs"
   }
 }
